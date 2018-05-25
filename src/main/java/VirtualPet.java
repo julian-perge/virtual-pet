@@ -10,6 +10,7 @@ public class VirtualPet
 
 	public boolean isHungry()
 	{
+		
 		return true;
 	}
 
