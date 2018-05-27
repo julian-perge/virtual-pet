@@ -1,13 +1,13 @@
-#Main Ideas#
--Hunger/Energy
-~Instead of hunger I have energy or health so I can say that test of strength takes X amount of energy based on the encounter
---Berries (small energy, small hunger decrease but you have a lot of them)
---Meat (avg hunger decrease/avg energy increase)
---MRE-like item (high hunger decrease/high energy increase but massively increases boredom)
---Special food item (massively decreases hunger while decreasing thirst and boredom)
+#Main Ideas
+1. Energy
+2. Instead of hunger I have energy or health so I can say that test of strength takes X amount of energy based on the encounter
+	1. Berries (small energy, small hunger decrease but you have a lot of them)
+	1. Meat (avg hunger decrease/avg energy increase)
+	1. MRE-like item (high hunger decrease/high energy increase but massively increases boredom)
+	1. Special food item (massively decreases hunger while decreasing thirst and boredom)
 
---Including the appetite descriptions within a value range of 0-100
---~Hunger - 10 - "Starving"~
+3. Including the appetite descriptions within a value range of 0-100
+	3. Hunger - 10 - "Starving"
 
 -Enemy Encounter that are of random level
 -Encounter uses energy level and encounter level 
@@ -31,17 +31,7 @@
 -Sleep
 --Pet will fall asleep automatically if sleep is less than 10
 
-##Future ideas##
+##Future ideas
 ~Food storage for selecting a food to feed to pet
 ~Boredom
 SG - Every 30-60 minutes boredom increase by 5%
-
-
-Instance variables are the state of the pet
-Methods are behavior based (feeding/playing)
-
-	Game loop = passage of time, updates everything
-
-Exit loop when games is suppose to end
-
-include tick() method in VirtualPet class
