@@ -1,5 +1,5 @@
+package virtualPet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class VirtualPetApp {
 	private static String petName = "";
@@ -28,6 +28,21 @@ public class VirtualPetApp {
 
 		String userMenuChoice = input.nextLine();
 		
+		do
+		{
+			userMenuChoice = gameLoop(input, userMenuChoice);
+			while (!isValidUserReponse(userMenuChoice))
+			{
+				System.out.println("That is not correct, please try again.");
+				userMenuChoice = input.nextLine();
+			}
+		} while (isValidUserReponse(userMenuChoice));
+
+		input.close();
+	}
+
+	private static String gameLoop(Scanner input, String userMenuChoice)
+	{
 		while (isValidUserReponse(userMenuChoice)) 
 		{
 			switch (userMenuChoice) 
@@ -72,26 +87,17 @@ public class VirtualPetApp {
 					pet.tick(3);
 					break;
 				case "4":
+					System.out.println("You decide to do nothing. A few hours go by.");
 					pet.tick(4);
 					break;
 				default:
-//					while (!isValidUserReponse(userMenuChoice))
-//					{
-//						System.out.println("That is not a valid response. Please try again.");
-//						userMenuChoice = input.nextLine();
-//					}
+					System.out.println("Not a valid choice.");
 					break;
 			}
-			
 			getPetStatus();
-			
-			System.out.println("\nWhat else would you like to do?");
 			userMenuChoice = input.nextLine();
 		}
-		
-
-
-		input.close();
+		return userMenuChoice;
 	}
 
 	public static void petMenu() {
@@ -101,17 +107,18 @@ public class VirtualPetApp {
 		System.out.println("4. Do nothing");
 	}
 
-	public static boolean isValidUserReponse(String userResponse) {
-		if (userResponse.equals("4")) 
+	public static boolean isValidUserReponse(String userResponse)
+	{
+		switch (userResponse)
 		{
-			System.out.println("You decide to do nothing. A few hours go by.");
-		} 
-		else if (!userResponse.equals("1") 
-				&& !userResponse.equals("2") 
-				&& !userResponse.equals("3")) {
-			return false;
+			case "1":
+			case "2":
+			case "3":
+			case "4":
+				return true;
+			default:
+				return false;
 		}
-		return true;
 	}
 	
 	public static void getPetStatus() {

@@ -1,5 +1,8 @@
+package virtualPet;
 import org.junit.Assert;
 import org.junit.Test;
+
+import virtualPet.VirtualPetApp;
 
 public class VirtualPetAppTest
 {

@@ -1,3 +1,4 @@
+package virtualPet;
 public class VirtualPet
 {
 	public int hunger = 0;
@@ -6,7 +7,8 @@ public class VirtualPet
 	private String name = "pet";
 	
 	private final int intMAX_ATTRIBUTE_VALUE = 100;
-	private final int intMIN_ATTRIBUTE_VALUE = 0;
+	
+//	private final int intMIN_ATTRIBUTE_VALUE = 0;
 	
 	private final int MAX_PET_NAME_LENGTH = 16;
 	
@@ -113,28 +115,28 @@ public class VirtualPet
 		switch (test) {
 		// is fed
 		case 1:
-			fun -= 5;
-			energy += 5;
-			if (energy >= intMAX_ATTRIBUTE_VALUE)
+			this.fun -= 5;
+			this.energy += 5;
+			if (this.energy >= intMAX_ATTRIBUTE_VALUE)
 			{
-				energy = intMAX_ATTRIBUTE_VALUE;
+				this.energy = intMAX_ATTRIBUTE_VALUE;
 			}
 			break;
 		// is played with
 		case 2:
-			hunger -= 5;
-			energy -= 5;
+			this.hunger -= 5;
+			this.energy -= 5;
 			break;
 		// has slept
 		case 3:
-			hunger -= 5;
-			fun -= 5;
+			this.hunger -= 5;
+			this.fun -= 5;
 			break;
 		// does nothing
 		case 4:
-			hunger -= 5;
-			fun -= 5;
-			energy -= 5;
+			this.hunger -= 5;
+			this.fun -= 5;
+			this.energy -= 5;
 			break;
 		default:
 			break;
