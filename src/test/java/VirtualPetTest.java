@@ -3,12 +3,44 @@ import org.junit.Test;
 
 public class VirtualPetTest
 {
-	VirtualPet vPet = new VirtualPet(50,50,50);
+	VirtualPet vPet = new VirtualPet("pet",50,50,50);
+	
+	@Test
+	public void shouldReturnPetHungerLevel()
+	{
+		int testExpectedHungerValue = 50;
+		int testPetHungerLevel = vPet.getHungerLevel();
+		Assert.assertEquals(testExpectedHungerValue, testPetHungerLevel);
+	}
+
+	@Test
+	public void shouldReturnPetFunLevel()
+	{
+		int testExpectedFunValue = 50;
+		int testPetFunLevel = vPet.getFunLevel();
+		Assert.assertEquals(testExpectedFunValue, testPetFunLevel);
+	}
+	
+	@Test
+	public void shouldReturnPetEnergyLevel()
+	{
+		int testExpectedEnergyValue = 50;
+		int testPetEnergyLevel = vPet.getEnergyLevel();
+		Assert.assertEquals(testExpectedEnergyValue, testPetEnergyLevel);
+	}
+	
+	@Test
+	public void shouldReturnPetName()
+	{
+		String testExpectedPetName = "pet";
+		String testPetName = vPet.getPetName();
+		Assert.assertEquals(testExpectedPetName, testPetName);
+	}
 	
 	@Test
 	public void shouldReturnTrueWhenHungry()
 	{	
-		boolean underTestHungry = vPet.isHungry(74);
+		boolean underTestHungry = vPet.isHungry(49);
 		Assert.assertEquals(true, underTestHungry);
 	}
 	
@@ -20,55 +52,64 @@ public class VirtualPetTest
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenThirsty()
+	public void shouldReturnTrueWhenIsBored()
 	{
-		boolean underTestThirst = vPet.isThirsty(74);
+		boolean underTestThirst = vPet.isBored(40);
 		Assert.assertEquals(true, underTestThirst);
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenThirsty()
+	public void shouldReturnFalseWhenIsBored()
 	{
-		boolean underTestThirst = vPet.isThirsty(81);
+		boolean underTestThirst = vPet.isBored(81);
 		Assert.assertEquals(false, underTestThirst);
 	}
 	
 	@Test
-	public void shouldReturnTrueWhenSleepy()
+	public void shouldReturnTrueWhenLowEnergy()
 	{
-		boolean underTestSleep = vPet.isSleepy(15);
-		Assert.assertEquals(true, underTestSleep);
+		boolean testEnergy = vPet.hasLowEnergy(15);
+		Assert.assertEquals(true, testEnergy);
 	}
 	
 	@Test
-	public void shouldReturnFalseWhenSleepy()
+	public void shouldReturnFalseWhenLowEnergy()
 	{
-		boolean underTestSleep = vPet.isSleepy(16);
+		boolean underTestSleep = vPet.hasLowEnergy(16);
 		Assert.assertEquals(false, underTestSleep);
 	}
 	
 	@Test
-	public void shouldReturnPetHungerLevel()
+	public void shouldReturnTrueWhenPetNameIsNotValid()
 	{
-		int testExpectedHungerValue = vPet.hunger;
-		int testPetHungerLevel = vPet.getHungerLevel(testExpectedHungerValue);
-		Assert.assertEquals(testExpectedHungerValue, testPetHungerLevel);
-	}
-
-	@Test
-	public void shouldReturnPetThirstLevel()
-	{
-		int testExpectedThirstValue = vPet.thirst;
-		int testPetThirstLevel = vPet.getThirstLevel(testExpectedThirstValue);
-		Assert.assertEquals(testExpectedThirstValue, testPetThirstLevel);
+		String testPetName = "12345678912345678"; // 17 chars
+		boolean testPetNameLength = vPet.petNameIsGreaterThanMaxLength(testPetName);
+		Assert.assertEquals(true, testPetNameLength);
 	}
 	
 	@Test
-	public void shouldReturnPetSleepLevel()
+	public void shouldReturnFalseWhenPetNameIsNotValid()
 	{
-		int testExpectedSleepValue = vPet.sleep;
-		int testPetSleepLevel = vPet.getSleepLevel(testExpectedSleepValue);
-		Assert.assertEquals(testExpectedSleepValue, testPetSleepLevel);
+		String testPetName = "1234567891234567"; // 16 chars
+		boolean testPetNameLength = vPet.petNameIsGreaterThanMaxLength(testPetName);
+		Assert.assertEquals(false, testPetNameLength);
 	}
-
+	
+	@Test
+	public void shouldSetAttributeToMaxValueFromMenuAction()
+	{
+		int testExpectedValue = 100;
+		vPet.feed();
+		vPet.feed();
+		vPet.feed();
+		vPet.feed();
+		int testValue = vPet.getHungerLevel();
+		Assert.assertEquals(testExpectedValue, testValue);
+	}
+	
+//	@Test
+//	public void shouldReturnNewHungerLevelFromFeeding()
+//	{
+//		Assert.assertEquals(65, vPet.feed());
+//	}
 }
