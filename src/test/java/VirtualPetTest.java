@@ -75,7 +75,7 @@ public class VirtualPetTest
 	@Test
 	public void shouldReturnFalseWhenLowEnergy()
 	{
-		boolean underTestSleep = vPet.hasLowEnergy(16);
+		boolean underTestSleep = vPet.hasLowEnergy(50);
 		Assert.assertEquals(false, underTestSleep);
 	}
 	
@@ -107,9 +107,11 @@ public class VirtualPetTest
 		Assert.assertEquals(testExpectedValue, testValue);
 	}
 	
-//	@Test
-//	public void shouldReturnNewHungerLevelFromFeeding()
-//	{
-//		Assert.assertEquals(65, vPet.feed());
-//	}
+	@Test
+	public void shouldDecrementAttributeValuesWhenTickMethodIsCalled()
+	{
+		int testExpectedValue = 40;
+		int testValue = vPet.hunger;
+		Assert.assertEquals(testExpectedValue, testValue);
+	}
 }

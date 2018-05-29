@@ -3,7 +3,7 @@ import java.util.Set;
 
 public class VirtualPetApp {
 	private static String petName = "";
-	static VirtualPet pet = new VirtualPet(petName, 50, 50, 50);
+	static VirtualPet pet = new VirtualPet(petName, 50, 50, 20);
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -21,7 +21,7 @@ public class VirtualPetApp {
 		}
 		
 		pet.setName(petName);
-		pet.getPetStatus();
+		getPetStatus();
 
 		System.out.println("\nWhat do you want to do with " + petName+ "?\n");
 		petMenu();
@@ -35,29 +35,55 @@ public class VirtualPetApp {
 				case "1":
 					if (!pet.isHungry(pet.hunger))
 					{
-						System.out.println(petName + " is not hungry!");
+						System.out.println(petName + " is not hungry!\n");
+						break;
 					}
 					else
 					{
-						pet.feed();						
+						System.out.println("You feed " + petName);
+						pet.feed();
 					}
+					pet.tick(1);
 					break;
 				case "2":
-
+					if (!pet.isBored(pet.fun))
+					{
+						System.out.println(petName + " doesn't want to play to right now.\n");
+						break;
+					} 
+					else 
+					{
+						System.out.println("You play with " + petName);
+						pet.playWith();
+					}
+					pet.tick(2);
 					break;
 				case "3":
-
+					if (!pet.hasLowEnergy(pet.energy))
+					{
+						System.out.println(petName + " is already well rested.\n");
+						break;
+					}
+					else
+					{
+						System.out.println(petName + " goes to sleep");
+						pet.rest();
+					}
+					pet.tick(3);
+					break;
+				case "4":
+					pet.tick(4);
 					break;
 				default:
-					while (!isValidUserReponse(userMenuChoice))
-					{
-						System.out.println("That is not a valid response. Please try again.");
-						userMenuChoice = input.nextLine();
-					}
+//					while (!isValidUserReponse(userMenuChoice))
+//					{
+//						System.out.println("That is not a valid response. Please try again.");
+//						userMenuChoice = input.nextLine();
+//					}
 					break;
 			}
 			
-			pet.getPetStatus();
+			getPetStatus();
 			
 			System.out.println("\nWhat else would you like to do?");
 			userMenuChoice = input.nextLine();
@@ -71,7 +97,7 @@ public class VirtualPetApp {
 	public static void petMenu() {
 		System.out.println("1. Feed " + petName);
 		System.out.println("2. Play with " + petName);
-		System.out.println("3. Put  " + petName + " to bed");
+		System.out.println("3. Put " + petName + " to bed");
 		System.out.println("4. Do nothing");
 	}
 
@@ -86,5 +112,11 @@ public class VirtualPetApp {
 			return false;
 		}
 		return true;
+	}
+	
+	public static void getPetStatus() {
+		System.out.println("Hunger: " + pet.getHungerLevel() 
+				+ "\nFun: " + pet.getFunLevel()
+				+ "\nEnergy: " + pet.getEnergyLevel() );
 	}
 }

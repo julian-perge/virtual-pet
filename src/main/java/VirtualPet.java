@@ -3,16 +3,16 @@ public class VirtualPet
 	public int hunger = 0;
 	public int fun = 0;
 	public int energy = 0;
-	private static String name = "pet";
+	private String name = "pet";
 	
-	private int intMAX_ATTRIBUTE_VALUE = 100;
-	private int intMIN_ATTRIBUTE_VALUE = 0;
+	private final int intMAX_ATTRIBUTE_VALUE = 100;
+	private final int intMIN_ATTRIBUTE_VALUE = 0;
 	
-	private int MAX_PET_NAME_LENGTH = 16;
+	private final int MAX_PET_NAME_LENGTH = 16;
 	
-	private int intSTATUS_EFFECT_VALUE = 80;
+	private final int intSTATUS_EFFECT_VALUE = 80;
 	
-	private int intMIN_VALUE_OF_ENERGY = 15;
+	private final int MIN_VALUE_OF_ENERGY_BEFORE_REST = 40;
 	
 	public VirtualPet(String newName, int hunger, int fun, int exhaustion)
 	{
@@ -44,7 +44,7 @@ public class VirtualPet
 	
 	public boolean hasLowEnergy(int energyLevel)
 	{
-		if (energyLevel <= intMIN_VALUE_OF_ENERGY)
+		if (energyLevel <= MIN_VALUE_OF_ENERGY_BEFORE_REST)
 		{
 			return true;		
 		}
@@ -62,42 +62,82 @@ public class VirtualPet
 		return true;
 	}
 	
-	public void getPetStatus() {
-		System.out.println("Hunger: " + getHungerLevel() 
-				+ "\nFun: " + getFunLevel()
-				+ "\nEnergy: " + getEnergyLevel() );
-	}
-	
 	public void setName(String newName) {
 		name = newName;
 	}
 	
 	public String getPetName() {
-		return name;
+		return this.name;
 	}
 	
 	public int getHungerLevel()
 	{
-		return hunger;
+		return this.hunger;
 	}
 	
 	public void feed()
 	{
-		hunger = getHungerLevel() + 15;
-		if (hunger > intMAX_ATTRIBUTE_VALUE)
+		this.hunger += 15;
+		if (this.hunger > intMAX_ATTRIBUTE_VALUE)
 		{
-			hunger = intMAX_ATTRIBUTE_VALUE;
+			this.hunger = intMAX_ATTRIBUTE_VALUE;
 		}		
-		System.out.println("You feed " + name);
 	}
 	
 	public int getFunLevel()
 	{
-		return fun;
+		return this.fun;
+	}
+	
+	public void playWith()
+	{
+		this.fun += 15;
+		if (this.fun > intMAX_ATTRIBUTE_VALUE)
+		{
+			this.fun = intMAX_ATTRIBUTE_VALUE;
+		}		
 	}
 	
 	public int getEnergyLevel()
 	{
-		return energy;
+		return this.energy;
+	}
+	
+	public void rest()
+	{
+		this.energy = intMAX_ATTRIBUTE_VALUE;
+	}
+	
+	public void tick(int test)
+	{
+		switch (test) {
+		// is fed
+		case 1:
+			fun -= 5;
+			energy += 5;
+			if (energy >= intMAX_ATTRIBUTE_VALUE)
+			{
+				energy = intMAX_ATTRIBUTE_VALUE;
+			}
+			break;
+		// is played with
+		case 2:
+			hunger -= 5;
+			energy -= 5;
+			break;
+		// has slept
+		case 3:
+			hunger -= 5;
+			fun -= 5;
+			break;
+		// does nothing
+		case 4:
+			hunger -= 5;
+			fun -= 5;
+			energy -= 5;
+			break;
+		default:
+			break;
+		}
 	}
 }
